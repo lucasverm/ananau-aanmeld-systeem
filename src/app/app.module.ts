@@ -1,16 +1,31 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { WelkomComponent } from './welkom/welkom.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { ProgressionBarComponent } from './progression-bar/progression-bar.component';
+import { NgbModule, NgbPaginationModule, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
+import { Stap1Component } from './stap1/stap1.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    WelkomComponent,
+    PageNotFoundComponent,
+    ProgressionBarComponent,
+    Stap1Component
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    NgbModule,
+    NgbPaginationModule,
+    NgbAlertModule
   ],
   providers: [],
   bootstrap: [AppComponent]

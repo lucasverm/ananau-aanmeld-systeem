@@ -1,0 +1,164 @@
+<div class="row">
+  <div class="col-12 marginTop10 col-lg-10 offset-lg-1">
+    <app-progression-bar [waarde]=waarde [stap]="1"></app-progression-bar>
+  </div>
+  <div class="col-12 text-left ">
+    <form [formGroup]="algemeneGegevensFormulier" (ngSubmit)='itemToevoegen()'>
+      <div class="row">
+        <div class="col-12 col-lg-10 offset-lg-1">
+          <div class="row">
+            <div class="col-12 text-left">
+              <h2>Algemene gegevens:</h2>
+            </div>
+            <div class="col-12 col-lg-10 offset-lg-1">
+              <div class="alert alert-success" role="alert" [hidden]="successMessage == null">
+                {{successMessage}}
+              </div>
+              <div class="alert alert-danger" role="alert" [hidden]="errorMessage == null">
+                {{errorMessage}}
+              </div>
+            </div>
+            <div class="col-12 col-sm-6 col-md-3">
+              <label for="voornaam" class="marginTop10">Voornaam:</label>
+              <input type="text" class="form-control" id="voornaam" formControlName="voornaam">
+            </div>
+            <div class="col-12 col-sm-6 col-md-3">
+              <label for="achternaam" class="marginTop10">Achternaam:</label>
+              <input type="text" class="form-control" id="achternaam" formControlName="achternaam">
+            </div>
+            <div class="col-12 col-sm-6 col-md-3">
+              <label for="aankoopDatum" class="marginTop10">Telefoonnummer:</label>
+              <input type="text" class="form-control" id="telefoonNummer" formControlName="telefoonNummer">
+            </div>
+            <div class="col-12 col-sm-6 col-md-3 ">
+              <label for="email" class="marginTop10">Emailadres:</label>
+              <input type="email" class="form-control" id="email" formControlName="email">
+            </div>
+            <div class="col-12 col-sm-6 col-md-3">
+              <label for="geboorteDatum" class="marginTop10">Geboortedatum:</label>
+              <input type="date" class="form-control" id="geboorteDatum" formControlName="geboorteDatum">
+            </div>
+            <div class="col-12 col-sm-6 col-md-3">
+              <label for="geboortePlaats" class="marginTop10">Geboorteplaats:</label>
+              <input type="text" class="form-control" id="geboortePlaats" formControlName="geboortePlaats">
+            </div>
+            <div class="col-12 col-sm-6 col-md-3">
+              <label for="nationaliteit" class="marginTop10">Nationaliteit:</label>
+              <input type="text" class="form-control" id="nationaliteit" formControlName="nationaliteit">
+            </div>
+            <div class="col-12 col-sm-6 col-md-3">
+              <label for="geboortePlaats" class="marginTop10">Passpoortnummer:</label>
+              <input type="text" class="form-control" id="geboortePlaats" formControlName="geboortePlaats">
+            </div>
+            <div class="col-12 marginTop10">
+              <hr />
+            </div>
+            <div class="col-12 text-left marginTop50">
+              <h2>Adres:</h2>
+            </div>
+            <div class="col-12 col-sm-6 col-md-6">
+              <label for="straatnaam" class="marginTop10">Straatnaam:</label>
+              <input type="text" class="form-control" id="straatnaam" formControlName="straatnaam">
+            </div>
+            <div class="col-12 col-sm-6 col-md-3">
+              <label for="huisnummer" class="marginTop10">Huisnummer:</label>
+              <input type="text" class="form-control" id="huisnummer" formControlName="huisnummer">
+            </div>
+            <div class="col-12 col-sm-6 col-md-3">
+              <label for="bus" class="marginTop10">Bus:</label>
+              <input type="text" class="form-control" id="bus" formControlName="bus">
+            </div>
+
+            <div class="col-12 col-sm-6 col-md-6">
+              <label for="postcode" class="marginTop10">Postcode:</label>
+              <input type="text" class="form-control" id="postcode" formControlName="postcode">
+            </div>
+            <div class="col-12 col-sm-6 col-md-6">
+              <label for="gemeente" class="marginTop10">Gemeente:</label>
+              <input type="text" class="form-control" id="gemeente" formControlName="gemeente">
+            </div>
+            <div class="col-12 marginTop10">
+              <hr />
+            </div>
+            <div class="col-12 text-left marginTop50">
+              <h2>Contact persoon in geval van nood:</h2>
+            </div>
+            <div class="col-12 col-sm-6 col-md-4">
+              <label for="voornaamNood" class="marginTop10">Voornaam:</label>
+              <input type="text" class="form-control" id="voornaamNood" formControlName="voornaamNood">
+            </div>
+            <div class="col-12 col-sm-6 col-md-4">
+              <label for="achternaamNood" class="marginTop10">Achternaam:</label>
+              <input type="text" class="form-control" id="achternaamNood" formControlName="achternaamNood">
+            </div>
+            <div class="col-12 col-sm-6 col-md-4">
+              <label for="relatieNood" class="marginTop10">Relatie tot persoon:</label>
+              <input type="text" class="form-control" id="relatieNood" formControlName="relatieNood">
+            </div>
+            <div class="col-12 col-sm-6 col-md-6">
+              <label for="emailNood" class="marginTop10">Emailadres:</label>
+              <input type="email" class="form-control" id="emailNood" formControlName="emailNood">
+            </div>
+            <div class="col-12 col-sm-6 col-md-6">
+              <label for="telefoonNummerNood" class="marginTop10">Telefoonnummer:</label>
+              <input type="text" class="form-control" id="telefoonNummerNood" formControlName="telefoonNummerNood">
+            </div>
+            <div class="col-12 marginTop10">
+              <hr />
+            </div>
+            <div class="col-12 text-left marginTop50">
+              <h2>Medische info:</h2>
+            </div>
+            <div class="col-12 col-sm-6 col-md-6">
+              <label for="allergie" class="marginTop10">Alergieën:</label>
+              <textarea type="text" class="form-control" id="allergie" formControlName="allergie"></textarea>
+            </div>
+            <div class="col-12 col-sm-6 col-md-6">
+              <label for="achternaamNood" class="marginTop10">Medische aandoeningen:</label>
+              <textarea type="text" class="form-control" id="achternaamNood"
+                formControlName="achternaamNood"></textarea>
+            </div>
+            <div class="col-12 marginTop10">
+              <hr />
+            </div>
+            <div class="col-12 text-left marginTop50">
+              <h2>Vrijwillgerswerk/stage info:</h2>
+            </div>
+            <div class="col-12 col-sm-6 col-md-6">
+              <label for="opleiding" class="marginTop10">Opleiding/beroep:</label>
+              <input type="text" class="form-control" id="opleiding" formControlName="opleiding">
+            </div>
+            <div class="col-12 col-sm-6 col-md-6">
+              <label for="ervaringVrijwillger" class="marginTop10">Voorgaande ervaring(en) als vrijwilliger?</label>
+              <textarea type="text" class="form-control" id="ervaringVrijwillger"
+                formControlName="ervaringVrijwillger"></textarea>
+            </div>
+            <div class="col-12 col-sm-6 col-md-6">
+              <label for="spaansNiveau" class="marginTop10">Niveau Spaanse taal:</label>
+              <textarea type="text" class="form-control" id="spaansNiveau" formControlName="spaansNiveau"></textarea>
+            </div>
+            <div class="col-12 col-sm-6 col-md-6">
+              <label for="takenVrijwilliger" class="marginTop10">Aan welke taken zou je graag meewerken tijdens het
+                vrijwilligerswerk?</label>
+              <textarea type="text" class="form-control" id="takenVrijwilliger"
+                formControlName="takenVrijwilliger"></textarea>
+            </div>
+            <div class="col-12 col-sm-6 col-md-6">
+              <label for="verwachtingenVrijwilliger" class="marginTop10">Wat verwacht je zelf van het
+                vrijwilligerswerk?</label>
+              <textarea type="text" class="form-control" id="verwachtingenVrijwilliger"
+                formControlName="verwachtingenVrijwilliger"></textarea>
+            </div>
+            <div class="col-12 col-sm-6 col-md-6">
+              <label for="voorstellen" class="marginTop10">Heb je zelf bepaalde voorstellen?</label>
+              <textarea type="text" class="form-control" id="voorstellen" formControlName="voorstellen"></textarea>
+            </div>
+            <div class="col-12 offset-sm-3 col-sm-6 offset-md-4 col-md-4">
+              <button type="submit" class="btn btn-primary marginBottom1O marginTop10 width100"
+                [disabled]='!algemeneGegevensFormulier.valid'>Naar Stap 2!</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
