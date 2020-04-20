@@ -9,6 +9,8 @@ import { ProgressionBarComponent } from './progression-bar/progression-bar.compo
 import { NgbModule, NgbPaginationModule, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
 import { Stap1Component } from './stap1/stap1.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { VindApplicatieComponent } from './vind-applicatie/vind-applicatie.component';
+import { Stap2Component } from './stap2/stap2.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     WelkomComponent,
     PageNotFoundComponent,
     ProgressionBarComponent,
-    Stap1Component
+    Stap1Component,
+    VindApplicatieComponent,
+    Stap2Component
   ],
   imports: [
     BrowserModule,

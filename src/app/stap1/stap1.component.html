@@ -3,14 +3,14 @@
     <app-progression-bar [waarde]=waarde [stap]="1"></app-progression-bar>
   </div>
   <div class="col-12 text-left ">
-    <form [formGroup]="algemeneGegevensFormulier" (ngSubmit)='itemToevoegen()'>
+    <form [formGroup]="algemeneGegevensFormulier" (ngSubmit)='applicatieToevoegen()'>
       <div class="row">
         <div class="col-12 col-lg-10 offset-lg-1">
           <div class="row">
             <div class="col-12 text-left">
               <h2>Algemene gegevens:</h2>
             </div>
-            <div class="col-12 col-lg-10 offset-lg-1">
+            <div class="col-12">
               <div class="alert alert-success" role="alert" [hidden]="successMessage == null">
                 {{successMessage}}
               </div>
@@ -47,8 +47,8 @@
               <input type="text" class="form-control" id="nationaliteit" formControlName="nationaliteit">
             </div>
             <div class="col-12 col-sm-6 col-md-3">
-              <label for="geboortePlaats" class="marginTop10">Passpoortnummer:</label>
-              <input type="text" class="form-control" id="geboortePlaats" formControlName="geboortePlaats">
+              <label for="paspoortNummer" class="marginTop10">Passpoortnummer:</label>
+              <input type="text" class="form-control" id="paspoortNummer" formControlName="paspoortNummer">
             </div>
             <div class="col-12 marginTop10">
               <hr />
@@ -100,8 +100,8 @@
               <input type="email" class="form-control" id="emailNood" formControlName="emailNood">
             </div>
             <div class="col-12 col-sm-6 col-md-6">
-              <label for="telefoonNummerNood" class="marginTop10">Telefoonnummer:</label>
-              <input type="text" class="form-control" id="telefoonNummerNood" formControlName="telefoonNummerNood">
+              <label for="telefoonnummerNood" class="marginTop10">Telefoonnummer:</label>
+              <input type="text" class="form-control" id="telefoonnummerNood" formControlName="telefoonnummerNood">
             </div>
             <div class="col-12 marginTop10">
               <hr />
@@ -114,9 +114,9 @@
               <textarea type="text" class="form-control" id="allergie" formControlName="allergie"></textarea>
             </div>
             <div class="col-12 col-sm-6 col-md-6">
-              <label for="achternaamNood" class="marginTop10">Medische aandoeningen:</label>
-              <textarea type="text" class="form-control" id="achternaamNood"
-                formControlName="achternaamNood"></textarea>
+              <label for="medischeAandoening" class="marginTop10">Medische aandoeningen:</label>
+              <textarea type="text" class="form-control" id="medischeAandoening"
+                formControlName="medischeAandoening"></textarea>
             </div>
             <div class="col-12 marginTop10">
               <hr />
@@ -155,7 +155,8 @@
             </div>
             <div class="col-12 offset-sm-3 col-sm-6 offset-md-4 col-md-4">
               <button type="submit" class="btn btn-primary marginBottom1O marginTop10 width100"
-                [disabled]='!algemeneGegevensFormulier.valid'>Naar Stap 2!</button>
+              [disabled]='!algemeneGegevensFormulier.valid'
+                >Naar Stap 2!</button>
             </div>
           </div>
         </div>

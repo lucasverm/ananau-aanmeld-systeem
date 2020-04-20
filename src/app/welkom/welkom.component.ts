@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class WelkomComponent implements OnInit {
 
-  public waarde: Number = (0 / 6 * 100)
+  public waarde: Number = (6 / 6 * 100)
   constructor() { }
 
   ngOnInit() {

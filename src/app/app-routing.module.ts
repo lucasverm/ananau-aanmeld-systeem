@@ -3,6 +3,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { WelkomComponent } from './welkom/welkom.component';
 import { Stap1Component } from './stap1/stap1.component';
+import { VindApplicatieComponent } from './vind-applicatie/vind-applicatie.component';
+import { Stap2Component } from './stap2/stap2.component';
 
 
 const routes: Routes = [
@@ -13,6 +15,14 @@ const routes: Routes = [
   {
     path: 'stap-1',
     component: Stap1Component
+  },
+  {
+    path: 'stap-2',
+    component: Stap2Component
+  },
+  {
+    path: 'vind-applicatie',
+    component: VindApplicatieComponent
   },
   {
     path: '',
