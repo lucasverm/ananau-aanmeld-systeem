@@ -28,6 +28,12 @@ export class Applicatie {
           voorstellen: String;
           huidigeStap: Number;
 
+          periodeStageVan: Date;
+          periodeStageTot: Date;
+          periodeVerblijfVan: Date;
+          periodeVerblijfTot: Date;
+          aantalWekenSpaans: String;
+
 
           static fromJSON(json: any): Applicatie {
                     var item = new Applicatie();
@@ -59,6 +65,12 @@ export class Applicatie {
                     item.verwachtingenVrijwilliger = json.verwachtingenVrijwilliger;
                     item.voorstellen = json.voorstellen;
                     item.huidigeStap = json.huidigeStap;
+                    item.periodeStageVan  = json.periodeStageVan;
+                    item.periodeStageTot = json.periodeStageTot; 
+                    item.periodeVerblijfVan = json.periodeVerblijfVan;
+                    item.periodeVerblijfTot = json.periodeVerblijfTot;
+                    item.aantalWekenSpaans = json.aantalWekenSpaans;
+          
                     return item;
           }
 }

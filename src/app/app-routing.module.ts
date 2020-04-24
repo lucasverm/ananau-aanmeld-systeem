@@ -5,6 +5,7 @@ import { WelkomComponent } from './welkom/welkom.component';
 import { Stap1Component } from './stap1/stap1.component';
 import { VindApplicatieComponent } from './vind-applicatie/vind-applicatie.component';
 import { Stap2Component } from './stap2/stap2.component';
+import { ApplicatieResolver } from './resolver/applicatie.resolver';
 
 
 const routes: Routes = [
@@ -17,8 +18,9 @@ const routes: Routes = [
     component: Stap1Component
   },
   {
-    path: 'stap-2',
-    component: Stap2Component
+    path: 'stap-2/:id',
+    component: Stap2Component,
+    resolve: { applicatie: ApplicatieResolver },
   },
   {
     path: 'vind-applicatie',

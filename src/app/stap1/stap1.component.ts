@@ -83,15 +83,10 @@ export class Stap1Component implements OnInit {
     this.applicatie.takenVrijwilliger = this.algemeneGegevensFormulier.value.takenVrijwilliger;
     this.applicatie.verwachtingenVrijwilliger = this.algemeneGegevensFormulier.value.verwachtingenVrijwilliger;
     this.applicatie.voorstellen = this.algemeneGegevensFormulier.value.voorstellen;
-    console.log(this.applicatie);
-
-    
     this.applicatieService.postApplicatie$(this.applicatie).subscribe(
       val => {
         if (val) {
-          console.log(val);
-          
-          //this.router.navigate([`../dienst-overzicht`]);
+          this.router.navigate([`../stap-2/${val.id}`]);
         }
       },
       (error: HttpErrorResponse) => {

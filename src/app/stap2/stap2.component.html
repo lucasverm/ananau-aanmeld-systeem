@@ -1,1 +1,55 @@
-<p>stap2 works!</p>
+<div class="row">
+  <div class="col-12 marginTop10 col-lg-10 offset-lg-1">
+    <app-progression-bar [waarde]=waarde [stap]="2"></app-progression-bar>
+  </div>
+  <div class="col-12 text-left ">
+    <form [formGroup]="stap2Formulier" (ngSubmit)='stap2()'>
+      <div class="row">
+        <div class="col-12 col-lg-10 offset-lg-1">
+          <div class="row">
+            <div class="col-12 text-left">
+              <h2>Bevestigen van het vrijwilligerswerk en de periode</h2>
+            </div>
+            <div class="col-12">
+              <div class="alert alert-success" role="alert" [hidden]="successMessage == null">
+                {{successMessage}}
+              </div>
+              <div class="alert alert-danger" role="alert" [hidden]="errorMessage == null">
+                {{errorMessage}}
+              </div>
+            </div>
+            <div class="col-12 col-sm-6">
+              <label for="periodeStageVan" class="marginTop10">Voorgesteld startdatum van stage:</label>
+              <input type="date" class="form-control" id="periodeStageVan" formControlName="periodeStageVan">
+            </div>
+            <div class="col-12 col-sm-6 ">
+              <label for="periodeStageTot" class="marginTop10">Voorgesteld einddatum van stage:</label>
+              <input type="date" class="form-control" id="periodeStageTot" formControlName="periodeStageTot">
+            </div>
+            <div class="col-12 col-sm-6 ">
+              <label for="periodeVerblijfVan" class="marginTop10">Voorgesteld startdatum van verblijf in het
+                appartement:</label>
+              <input type="date" class="form-control" id="periodeVerblijfVan" formControlName="periodeVerblijfVan">
+            </div>
+            <div class="col-12 col-sm-6 ">
+              <label for="periodeVerblijfTot" class="marginTop10">Voorgesteld einddatum verblijf in het
+                appartement::</label>
+              <input type="date" class="form-control" id="periodeVerblijfTot" formControlName="periodeVerblijfTot">
+            </div>
+            <div class="col-12 col-sm-6 ">
+              <label for="aantalWekenSpaans" class="marginTop10">Aantal weken spaanse les:</label>
+              <p><i>Hier willen we bij aangeven dat wanneer je nog geen basisniveau Spaans spreekt het
+                  verplicht is om minimum 4 weken Spaanse lessen te volgen. Wanneer je wel al over een basis
+                  bezit zijn de lessen vrijblijvend, maar altijd aan te raden om je niveau nog te verbeteren.</i></p>
+              <input type="number" class="form-control" id="aantalWekenSpaans" formControlName="aantalWekenSpaans">
+            </div>
+
+            <div class="col-12 offset-sm-3 col-sm-6 offset-md-4 col-md-4">
+              <button type="submit" class="btn btn-primary marginBottom1O marginTop10 width100"
+                [disabled]='!stap2Formulier.valid'>Naar Stap 3!</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
