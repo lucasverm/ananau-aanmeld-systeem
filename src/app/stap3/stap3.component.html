@@ -1,0 +1,44 @@
+<div class="row">
+  <div class="col-12 marginTop10 col-lg-10 offset-lg-1">
+    <app-progression-bar [waarde]=waarde [stap]="2"></app-progression-bar>
+  </div>
+  <div class="col-12 text-left ">
+    <form [formGroup]="stap3Formulier" (ngSubmit)='stap3()'>
+      <div class="row">
+        <div class="col-12 col-lg-10 offset-lg-1">
+          <div class="row">
+            <div class="col-12 text-left">
+              <h2>bestanden uploaden: </h2>
+            </div>
+            <div class="col-12">
+              <div class="alert alert-success" role="alert" [hidden]="successMessage == null">
+                {{successMessage}}
+              </div>
+              <div class="alert alert-danger" role="alert" [hidden]="errorMessage == null">
+                {{errorMessage}}
+              </div>
+            </div>
+            <div class="col-12 col-sm-6">
+              <label for="foto">Scan internationaal reispaspoort</label>
+              <app-file-upload formControlName="reispaspoort"
+                [errorGevonden]="submitted &amp;&amp; stap3Formulier.controls.reispaspoort.errors"></app-file-upload>
+            </div>
+            <div class="col-12 col-sm-6">
+              <label for="foto">Scan attest van goed gedrag en zeden</label>
+              <app-file-upload formControlName="attest"
+                [errorGevonden]="submitted &amp;&amp; stap3Formulier.controls.attest.errors"></app-file-upload>
+            </div>
+            <div class="col-12 col-sm-6">
+              <label for="foto">Scan van diploma of opleiding</label>
+              <app-file-upload formControlName="diploma"
+                [errorGevonden]="submitted &amp;&amp; stap3Formulier.controls.diploma.errors"></app-file-upload>
+            </div>
+            <div class="col-12 offset-sm-3 col-sm-6 offset-md-4 col-md-4">
+              <button type="submit" class="btn btn-primary marginBottom1O marginTop10 width100">Naar Stap 3!</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+    <button class="btn btn-primary" (click)="toonAfbeelding()">toon afbeelding</button>
+  </div>

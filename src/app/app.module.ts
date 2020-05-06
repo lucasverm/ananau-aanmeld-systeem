@@ -11,6 +11,10 @@ import { Stap1Component } from './stap1/stap1.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { VindApplicatieComponent } from './vind-applicatie/vind-applicatie.component';
 import { Stap2Component } from './stap2/stap2.component';
+import { Stap3Component } from './stap3/stap3.component';
+import { FileUploadComponent } from './file-upload/file-upload.component';
+import { Stap4Component } from './stap4/stap4.component';
+import { Stap5Component } from './stap5/stap5.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +24,11 @@ import { Stap2Component } from './stap2/stap2.component';
     ProgressionBarComponent,
     Stap1Component,
     VindApplicatieComponent,
-    Stap2Component
+    Stap2Component,
+    Stap3Component,
+    FileUploadComponent,
+    Stap4Component,
+    Stap5Component
   ],
   imports: [
     BrowserModule,

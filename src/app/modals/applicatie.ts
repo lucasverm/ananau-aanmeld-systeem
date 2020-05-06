@@ -33,7 +33,7 @@ export class Applicatie {
           periodeVerblijfVan: Date;
           periodeVerblijfTot: Date;
           aantalWekenSpaans: String;
-
+          periodeBevestigd: boolean;
 
           static fromJSON(json: any): Applicatie {
                     var item = new Applicatie();
@@ -65,12 +65,12 @@ export class Applicatie {
                     item.verwachtingenVrijwilliger = json.verwachtingenVrijwilliger;
                     item.voorstellen = json.voorstellen;
                     item.huidigeStap = json.huidigeStap;
-                    item.periodeStageVan  = json.periodeStageVan;
-                    item.periodeStageTot = json.periodeStageTot; 
-                    item.periodeVerblijfVan = json.periodeVerblijfVan;
-                    item.periodeVerblijfTot = json.periodeVerblijfTot;
+                    item.periodeStageVan  = new Date(json.periodeStageVan);
+                    item.periodeStageTot = new Date(json.periodeStageTot); 
+                    item.periodeVerblijfVan = new Date(json.periodeVerblijfVan);
+                    item.periodeVerblijfTot = new Date(json.periodeVerblijfTot);
                     item.aantalWekenSpaans = json.aantalWekenSpaans;
-          
+                    item.periodeBevestigd = json.periodeBevestigd;
                     return item;
           }
 }

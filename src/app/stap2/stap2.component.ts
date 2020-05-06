@@ -21,7 +21,7 @@ export class Stap2Component implements OnInit {
     this.route.data.subscribe(data => {
       this.applicatie = data['applicatie'];
       console.log(this.applicatie);
-      
+
     });
   }
 
@@ -41,12 +41,11 @@ export class Stap2Component implements OnInit {
     this.applicatie.periodeVerblijfVan = this.stap2Formulier.value.periodeVerblijfVan;
     this.applicatie.periodeVerblijfTot = this.stap2Formulier.value.periodeVerblijfTot;
     this.applicatie.aantalWekenSpaans = this.stap2Formulier.value.aantalWekenSpaans;
-
+    this.applicatie.huidigeStap = 2;
     this.applicatieService.putApplicatie$(this.applicatie).subscribe(
       val => {
         if (val) {
-          console.log(val);
-          //this.router.navigate([`../stap-2`]);
+          this.router.navigate([`../stap-4/${val.id}`]);
         }
       },
       (error: HttpErrorResponse) => {
