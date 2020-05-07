@@ -1,1 +1,42 @@
-<p>stap5 works!</p>
+<div class="row">
+    <div class="col-12 marginTop10 col-lg-10 offset-lg-1">
+      <app-progression-bar [waarde]=waarde [stap]="5"></app-progression-bar>
+    </div>
+    <div class="col-12 text-left ">
+      <form [formGroup]="stap5Formulier" (ngSubmit)='stap3()'>
+        <div class="row">
+          <div class="col-12 col-lg-10 offset-lg-1">
+            <div class="row">
+              <div class="col-12 text-left">
+                <h2>Heb je nog verdere vragen voor ons?</h2>
+              </div>
+              <div class="col-12">
+                <label for="vragenVoorOns" class="marginTop10">Extra vragen:</label>
+                <textarea type="text" class="form-control" id="vragenVoorOns" formControlName="vragenVoorOns"></textarea>
+              </div>            
+            </div>
+            <div class="row">
+              <h2>Waarom heb je Añañau gekozen als organisatie om vrijwilligerswerk te gaan doen?</h2>
+            </div> 
+            <div class="col-12 col-sm-6">
+              <label for="motivatie" class="marginTop10">Motiveer waarom je dit zou willen doen:</label>
+              <textarea type="text" class="form-control" id="motivatie" formControlName="motivatie"></textarea>
+            </div>
+            <div class="row">
+              <h2>Hoe heb je voor het eerst van Añañau gehoord?</h2>
+            </div> 
+            <div class="col-12 col-sm-6">
+              <select multiple formControlName="welkeWeg">
+                <option value="">Hoe vond je ons?</option>
+                <option *ngFor="let weg of Weg" [ngValue]="weg" (change)="changeWeg($event)">{{weg}}
+                </option>
+              </select>
+            </div>
+            <div class="col-12 offset-sm-3 col-sm-6 offset-md-4 col-md-4">
+              <button type="submit" class="btn btn-primary marginBottom1O marginTop10 width100" (click)=stap5()>Naar Stap 6!</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  

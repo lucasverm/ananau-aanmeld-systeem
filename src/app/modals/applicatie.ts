@@ -35,6 +35,10 @@ export class Applicatie {
           aantalWekenSpaans: String;
           periodeBevestigd: boolean;
 
+          welkeWeg: String;
+          motivatie: String;
+          vragenVoorOns: String;
+
           static fromJSON(json: any): Applicatie {
                     var item = new Applicatie();
                     item.id = json.id;
@@ -71,6 +75,9 @@ export class Applicatie {
                     item.periodeVerblijfTot = new Date(json.periodeVerblijfTot);
                     item.aantalWekenSpaans = json.aantalWekenSpaans;
                     item.periodeBevestigd = json.periodeBevestigd;
+                    item.welkeWeg = json.welkeWeg;
+                    item.vragenVoorOns = json.vragenVoorOns;
+                    item.motivatie = json.motivatie;
                     return item;
           }
 }
