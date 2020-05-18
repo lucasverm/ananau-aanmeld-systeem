@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ApplicationModule } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Applicatie } from '../modals/applicatie';
 import { AppModule } from '../app.module';
 import { ApplicatieService } from '../services/applicatie.service';
@@ -14,41 +14,48 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class Stap1Component implements OnInit {
 
   public applicatie: Applicatie;
-  public waarde: Number = (1 / 6 * 100)
+  public waarde: Number = (1 / 5 * 100)
   public algemeneGegevensFormulier: FormGroup;
   public successMessage: string = null;
   public errorMessage: string = null;
 
-  constructor(public router: Router, private fb: FormBuilder, private applicatieService: ApplicatieService) { }
+  constructor(public router: Router, private route: ActivatedRoute, private fb: FormBuilder, private applicatieService: ApplicatieService) {
+    this.route.data.subscribe(data => {
+      this.applicatie = data['applicatie'];
+      if (this.applicatie == null) {
+        this.applicatie = new Applicatie();
+      }
+    });
+  }
 
   ngOnInit() {
     this.algemeneGegevensFormulier = this.fb.group({
-      achternaam: ['', [Validators.required]],
-      voornaam: ['', [Validators.required]],
-      email: ['', [Validators.required, Validators.email]],
-      straatnaam: ['', [Validators.required]],
-      huisnummer: ['', [Validators.required]],
-      bus: [''],
-      gemeente: ['', [Validators.required]],
-      postcode: ['', [Validators.required]],
-      geboorteDatum: ['', [Validators.required]],
-      geboortePlaats: ['', [Validators.required]],
-      nationaliteit: ['', [Validators.required]],
-      paspoortNummer: ['', [Validators.required]],
-      telefoonNummer: ['', [Validators.required]],
-      telefoonnummerNood: ['', [Validators.required]],
-      voornaamNood: ['', [Validators.required]],
-      achternaamNood: ['', [Validators.required]],
-      emailNood: ['', [Validators.required, Validators.email]],
-      relatieNood: ['', [Validators.required]],
-      allergie: [''],
-      medischeAandoening: [''],
-      opleiding: ['', [Validators.required]],
-      ervaringVrijwillger: ['', [Validators.required]],
-      spaansNiveau: ['', [Validators.required]],
-      takenVrijwilliger: ['', [Validators.required]],
-      verwachtingenVrijwilliger: ['', [Validators.required]],
-      voorstellen: ['', [Validators.required]],
+      achternaam: [this.applicatie.achternaam, [Validators.required]],
+      voornaam: [this.applicatie.voornaam, [Validators.required]],
+      email: [this.applicatie.email, [Validators.required, Validators.email]],
+      straatnaam: [this.applicatie.straatnaam, [Validators.required]],
+      huisnummer: [this.applicatie.huisnummer, [Validators.required]],
+      bus: [this.applicatie.bus],
+      gemeente: [this.applicatie.gemeente, [Validators.required]],
+      postcode: [this.applicatie.postcode, [Validators.required]],
+      geboorteDatum: [this.getDateForInput(this.applicatie.geboorteDatum), [Validators.required]],
+      geboortePlaats: [this.applicatie.geboortePlaats, [Validators.required]],
+      nationaliteit: [this.applicatie.nationaliteit, [Validators.required]],
+      paspoortNummer: [this.applicatie.paspoortNummer, [Validators.required]],
+      telefoonNummer: [this.applicatie.telefoonNummer, [Validators.required]],
+      telefoonnummerNood: [this.applicatie.telefoonnummerNood, [Validators.required]],
+      voornaamNood: [this.applicatie.voornaamNood, [Validators.required]],
+      achternaamNood: [this.applicatie.achternaamNood, [Validators.required]],
+      emailNood: [this.applicatie.emailNood, [Validators.required, Validators.email]],
+      relatieNood: [this.applicatie.relatieNood, [Validators.required]],
+      allergie: [this.applicatie.allergie],
+      medischeAandoening: [this.applicatie.medischeAandoening],
+      opleiding: [this.applicatie.opleiding, [Validators.required]],
+      ervaringVrijwillger: [this.applicatie.ervaringVrijwillger, [Validators.required]],
+      spaansNiveau: [this.applicatie.spaansNiveau, [Validators.required]],
+      takenVrijwilliger: [this.applicatie.takenVrijwilliger, [Validators.required]],
+      verwachtingenVrijwilliger: [this.applicatie.verwachtingenVrijwilliger, [Validators.required]],
+      voorstellen: [this.applicatie.voorstellen, [Validators.required]],
     })
   }
 
@@ -83,16 +90,50 @@ export class Stap1Component implements OnInit {
     this.applicatie.takenVrijwilliger = this.algemeneGegevensFormulier.value.takenVrijwilliger;
     this.applicatie.verwachtingenVrijwilliger = this.algemeneGegevensFormulier.value.verwachtingenVrijwilliger;
     this.applicatie.voorstellen = this.algemeneGegevensFormulier.value.voorstellen;
-    this.applicatieService.postApplicatie$(this.applicatie).subscribe(
-      val => {
-        if (val) {
-          this.router.navigate([`../stap-2/${val.id}`]);
+    if (this.applicatie.id == null) {
+      this.applicatieService.postApplicatie$(this.applicatie).subscribe(
+        val => {
+          if (val) {
+            console.log(val);
+            this.router.navigate([`../stap-2/${val.id}`]);
+          }
+        },
+        (error: HttpErrorResponse) => {
+          this.errorMessage = error.error;
         }
-      },
-      (error: HttpErrorResponse) => {
-        this.errorMessage = error.error;
+      );
+    } else {
+      this.applicatieService.putApplicatie$(this.applicatie).subscribe(
+        val => {
+          if (val) {
+            console.log(val);
+            this.router.navigate([`../stap-2/${val.id}`]);
+          }
+        },
+        (error: HttpErrorResponse) => {
+          this.errorMessage = error.error;
+        }
+      );
+    }
+  }
+
+  getDateForInput(date: Date): string {
+    if (date != null) {
+      var uitvoer: string = "";
+      uitvoer += date.getFullYear() + "-";
+      if (date.getMonth().toString().length == 1) {
+        uitvoer += "0" + (date.getMonth() + 1) + "-";
+      } else {
+        uitvoer += (date.getMonth() + 1) + "-";
       }
-    );
+      if (date.getDate().toString().length == 1) {
+        uitvoer += "0" + date.getDate();
+      } else {
+        uitvoer += date.getDate();
+      }
+      //uitvoer += 'T' + date.toTimeString().slice(0, 5);
+      return uitvoer;
+    }
   }
 
 }

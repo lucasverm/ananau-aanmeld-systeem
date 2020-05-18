@@ -13,7 +13,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class Stap5Component implements OnInit {
 
   public applicatie: Applicatie;
-  public waarde: Number = (5 / 6 * 100)
+  public waarde: Number = (5 / 5 * 100)
   public stap5Formulier: FormGroup;
   public successMessage: string = null;
   public errorMessage: string = null;
@@ -23,31 +23,60 @@ export class Stap5Component implements OnInit {
   constructor(public router: Router, private route: ActivatedRoute, private fb: FormBuilder, private applicatieService: ApplicatieService) {
     this.route.data.subscribe(data => {
       this.applicatie = data['applicatie'];
+      console.log(this.applicatie);
+
     });
+  }
+
+  gaNaarStap(getal: number) {
+    if (getal > 0 && getal < 6) {
+      this.router.navigate([`../stap-${getal}/${this.applicatie.id}`]);
+    }
   }
 
   ngOnInit() {
     this.stap5Formulier = this.fb.group({
       welkeWeg: ['', [Validators.required]],
       motivatie: ['', [Validators.required]],
-      vragenVoorOns:[]
+      vragenVoorOns: []
     })
   }
 
   stap5() {
     this.applicatie.welkeWeg = this.stap5Formulier.value.welkeWeg;
     this.applicatie.motivatie = this.stap5Formulier.value.motivatie;
-    this.applicatie.vragenVoorOns = this.stap5Formulier.value.vragenVoorOns;
+    this.applicatie.vragen = this.stap5Formulier.value.vragenVoorOns;
     this.applicatie.huidigeStap = 5;
     this.applicatieService.putApplicatie$(this.applicatie).subscribe(
       val => {
         if (val) {
-          this.router.navigate([`../stap-6/${val.id}`]);
+          //this.router.navigate([`../stap-6/${val.id}`]);
+          console.log(val);
         }
       },
       (error: HttpErrorResponse) => {
         this.errorMessage = error.error;
       }
     );
+  }
+
+  formatDate(date: Date): string {
+    var uitvoer: string = "";
+    if (date.getDate().toString().length == 1) {
+      uitvoer += "0" + date.getDate();
+    } else {
+      uitvoer += date.getDate();
+    }
+    uitvoer += "-"
+    if (date.getMonth().toString().length == 1) {
+      uitvoer += "0" + (date.getMonth() + 1) + "-";
+    } else {
+      uitvoer += (date.getMonth() + 1) + "-";
+    }
+    uitvoer += date.getFullYear();
+
+
+    //uitvoer += 'T' + date.toTimeString().slice(0, 5);
+    return uitvoer;
   }
 }

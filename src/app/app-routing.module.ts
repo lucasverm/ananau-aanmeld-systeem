@@ -18,7 +18,12 @@ const routes: Routes = [
   },
   {
     path: 'stap-1',
-    component: Stap1Component
+    component: Stap1Component,
+  },
+  {
+    path: 'stap-1/:id',
+    component: Stap1Component,
+    resolve: { applicatie: ApplicatieResolver },
   },
   {
     path: 'stap-2/:id',
@@ -36,9 +41,9 @@ const routes: Routes = [
     resolve: { applicatie: ApplicatieResolver },
   },
   {
-    path: 'stap-5/',
+    path: 'stap-5/:id',
     component: Stap5Component,
-    //resolve: { applicatie: ApplicatieResolver },
+    resolve: { applicatie: ApplicatieResolver },
   },
   {
     path: 'vind-applicatie',

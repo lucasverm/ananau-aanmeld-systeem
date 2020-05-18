@@ -1,42 +1,205 @@
 <div class="row">
-    <div class="col-12 marginTop10 col-lg-10 offset-lg-1">
-      <app-progression-bar [waarde]=waarde [stap]="5"></app-progression-bar>
-    </div>
-    <div class="col-12 text-left ">
-      <form [formGroup]="stap5Formulier" (ngSubmit)='stap3()'>
+  <div class="col-12 marginTop10 col-lg-10 offset-lg-1">
+    <app-progression-bar [waarde]=waarde [stap]="5"></app-progression-bar>
+  </div>
+  <div class="col-12 text-left ">
+    <div class="row">
+      <div class="col-12 col-lg-10 offset-lg-1">
         <div class="row">
-          <div class="col-12 col-lg-10 offset-lg-1">
-            <div class="row">
-              <div class="col-12 text-left">
-                <h2>Heb je nog verdere vragen voor ons?</h2>
-              </div>
-              <div class="col-12">
-                <label for="vragenVoorOns" class="marginTop10">Extra vragen:</label>
-                <textarea type="text" class="form-control" id="vragenVoorOns" formControlName="vragenVoorOns"></textarea>
-              </div>            
-            </div>
-            <div class="row">
-              <h2>Waarom heb je Añañau gekozen als organisatie om vrijwilligerswerk te gaan doen?</h2>
-            </div> 
-            <div class="col-12 col-sm-6">
-              <label for="motivatie" class="marginTop10">Motiveer waarom je dit zou willen doen:</label>
-              <textarea type="text" class="form-control" id="motivatie" formControlName="motivatie"></textarea>
-            </div>
-            <div class="row">
-              <h2>Hoe heb je voor het eerst van Añañau gehoord?</h2>
-            </div> 
-            <div class="col-12 col-sm-6">
-              <select multiple formControlName="welkeWeg">
-                <option value="">Hoe vond je ons?</option>
-                <option *ngFor="let weg of Weg" [ngValue]="weg" (change)="changeWeg($event)">{{weg}}
-                </option>
-              </select>
-            </div>
-            <div class="col-12 offset-sm-3 col-sm-6 offset-md-4 col-md-4">
-              <button type="submit" class="btn btn-primary marginBottom1O marginTop10 width100" (click)=stap5()>Naar Stap 6!</button>
-            </div>
+          <div class="col-12 text-left">
+            <h2>Applicatie controleren: </h2>
+          </div>
+          <div class="col-12">
+            <h3>Algemene info</h3>
+          </div>
+          <div class="col-12">
+            <table class="table table-sm table-bordered" (click)=gaNaarStap(1)>
+              <tr>
+                <th>Voornaam</th>
+                <td>{{applicatie.voornaam}}</td>
+              </tr>
+              <tr>
+                <th>Achternaam</th>
+                <td>{{applicatie.achternaam}}</td>
+              </tr>
+              <tr>
+                <th>Emailadres</th>
+                <td>{{applicatie.email}}</td>
+              </tr>
+              <tr>
+                <th>Geboortedatum</th>
+                <td>{{formatDate(applicatie.geboorteDatum)}}</td>
+              </tr>
+              <tr>
+                <th>Geboorteplaats</th>
+                <td>{{applicatie.geboortePlaats}}</td>
+              </tr>
+              <tr>
+                <th>Nationaliteit</th>
+                <td>{{applicatie.nationaliteit}}</td>
+              </tr>
+              <tr>
+                <th>Passpoortnummer</th>
+                <td>{{applicatie.paspoortNummer}}</td>
+              </tr>
+              <tr>
+                <th>Straatnaam</th>
+                <td>{{applicatie.straatnaam}}</td>
+              </tr>
+              <tr>
+                <th>Huisnummer</th>
+                <td>{{applicatie.huisnummer}}</td>
+              </tr>
+              <tr>
+                <th>Bus</th>
+                <td>{{applicatie.bus}}</td>
+              </tr>
+              <tr>
+                <th>Postcode</th>
+                <td>{{applicatie.postcode}}</td>
+              </tr>
+            </table>
+          </div>
+          <div class="col-12">
+            <h3>Nood contact</h3>
+          </div>
+          <div class="col-12">
+            <table class="table table-sm table-bordered" (click)=gaNaarStap(1)>
+              <tr>
+                <th>Voornaam nood contact</th>
+                <td>{{applicatie.voornaamNood}}</td>
+              </tr>
+              <tr>
+                <th>Relatie tot nood contact</th>
+                <td>{{applicatie.achternaamNood}}</td>
+              </tr>
+              <tr>
+                <th>Emailadres nood contact</th>
+                <td>{{applicatie.email}}</td>
+              </tr>
+              <tr>
+                <th>Telefoonnummer nood contact</th>
+                <td>{{applicatie.telefoonnummerNood}}</td>
+              </tr>
+            </table>
+          </div>
+          <div class="col-12">
+            <h3>Medische informatie</h3>
+          </div>
+          <div class="col-12">
+            <table class="table table-sm table-bordered" (click)=gaNaarStap(1)>
+              <tr>
+                <th>Alergieën</th>
+                <td>{{applicatie.allergie}}</td>
+              </tr>
+              <tr>
+                <th>Medische aandoeningen</th>
+                <td>{{applicatie.medischeAandoening}}</td>
+              </tr>
+            </table>
+          </div>
+          <div class="col-12">
+            <h3>Vrijwillgerswerk/stage info:</h3>
+          </div>
+          <div class="col-12">
+            <table class="table table-sm table-bordered" (click)=gaNaarStap(1)>
+              <tr>
+                <th>Opleiding/beroep:</th>
+                <td>{{applicatie.opleiding}}</td>
+              </tr>
+              <tr>
+                <th>Voorgaande ervaring(en) als vrijwilliger?</th>
+                <td>{{applicatie.ervaringVrijwillger}}</td>
+              </tr>
+              <tr>
+                <th>Niveau Spaanse taal:</th>
+                <td>{{applicatie.spaansNiveau}}</td>
+              </tr>
+              <tr>
+                <th>Aan welke taken zou je graag meewerken tijdens het
+                  vrijwilligerswerk?</th>
+                <td>{{applicatie.takenVrijwilliger}}</td>
+              </tr>
+              <tr>
+                <th>Wat verwacht je zelf van het vrijwilligerswerk?</th>
+                <td>{{applicatie.verwachtingenVrijwilliger}}</td>
+              </tr>
+              <tr>
+                <th>Heb je zelf bepaalde voorstellen?</th>
+                <td>{{applicatie.voorstellen}}</td>
+              </tr>
+            </table>
+          </div>
+          <div class="col-12">
+            <h2>Data van stage</h2>
+          </div>
+          <div class="col-12">
+            <table class="table table-sm table-bordered" (click)=gaNaarStap(2)>
+              <tr>
+                <th>Voorgesteld startdatum van stage</th>
+                <td>{{formatDate(applicatie.periodeStageVan)}}</td>
+              </tr>
+              <tr>
+                <th>Voorgesteld einddatum van stage</th>
+                <td>{{formatDate(applicatie.periodeStageTot)}}</td>
+              </tr>
+              <tr>
+                <th>Voorgesteld startdatum van verblijf in het appartement</th>
+                <td>{{formatDate(applicatie.periodeVerblijfVan)}}</td>
+              </tr>
+              <tr>
+                <th>Voorgesteld einddatum verblijf in het appartement:</th>
+                <td>{{formatDate(applicatie.periodeVerblijfTot)}}</td>
+              </tr>
+              <tr>
+                <th>Aantal weken spaanse les:</th>
+                <td>{{applicatie.aantalWekenSpaans}}</td>
+              </tr>
+            </table>
+          </div>
+          <div class="col-12">
+            <h2>Bestanden</h2>
+          </div>
+          <div class="col-12">
+            <table class="table table-sm table-bordered" (click)=gaNaarStap(3)>
+              <tr>
+                <th>Scan internationaal reispaspoort</th>
+                <td>{{applicatie.ReispaspoortNaam}}</td>
+              </tr>
+              <tr>
+                <th>Scan attest van goed gedrag en zeden</th>
+                <td>{{applicatie.attestNaam}}</td>
+              </tr>
+              <tr>
+                <th>Scan van diploma of opleiding</th>
+                <td>{{applicatie.diplomaNaam}}</td>
+              </tr>
+            </table>
+          </div>
+          <div class="col-12">
+            <h2>Extra informatie</h2>
+          </div>
+          <div class="col-12">
+            <table class="table table-sm table-bordered" (click)=gaNaarStap(4)>
+              <tr>
+                <th>Heb je nog verdere vragen voor ons?</th>
+                <td>{{applicatie.welkeWeg}}</td>
+              </tr>
+              <tr>
+                <th>Waarom heb je Añañau gekozen als organisatie om vrijwilligerswerk te gaan doen?</th>
+                <td>{{applicatie.motivatie}}</td>
+              </tr>
+              <tr>
+                <th>Hoe heb je voor het eerst van Añañau gehoord?</th>
+                <td>{{applicatie.vragen}}</td>
+              </tr>
+            </table>
+          </div>
+          <div class="col-12 offset-sm-3 col-sm-6 offset-md-4 col-md-4">
+            <button type="submit" class="btn btn-primary marginBottom1O marginTop10 width100"
+              (click)=stap4()>Indienen!</button>
           </div>
         </div>
-      </form>
+      </div>
     </div>
-  
+  </div>

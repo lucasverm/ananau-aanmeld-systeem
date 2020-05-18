@@ -12,7 +12,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class Stap2Component implements OnInit {
   public applicatie: Applicatie;
-  public waarde: Number = (2 / 6 * 100)
+  public waarde: Number = (2 / 5 * 100)
   public stap2Formulier: FormGroup;
   public successMessage: string = null;
   public errorMessage: string = null;
@@ -21,17 +21,16 @@ export class Stap2Component implements OnInit {
     this.route.data.subscribe(data => {
       this.applicatie = data['applicatie'];
       console.log(this.applicatie);
-
     });
   }
 
   ngOnInit() {
     this.stap2Formulier = this.fb.group({
-      periodeStageVan: ['', [Validators.required]],
-      periodeStageTot: ['', [Validators.required]],
-      periodeVerblijfVan: ['', [Validators.required]],
-      periodeVerblijfTot: ['', [Validators.required]],
-      aantalWekenSpaans: ['', [Validators.required]],
+      periodeStageVan: [this.getDateForInput(this.applicatie.periodeStageVan), [Validators.required]],
+      periodeStageTot: [this.getDateForInput(this.applicatie.periodeStageTot), [Validators.required]],
+      periodeVerblijfVan: [this.getDateForInput(this.applicatie.periodeVerblijfVan), [Validators.required]],
+      periodeVerblijfTot: [this.getDateForInput(this.applicatie.periodeVerblijfTot), [Validators.required]],
+      aantalWekenSpaans: [this.applicatie.aantalWekenSpaans, [Validators.required]],
     })
   }
 
@@ -45,13 +44,32 @@ export class Stap2Component implements OnInit {
     this.applicatieService.putApplicatie$(this.applicatie).subscribe(
       val => {
         if (val) {
-          this.router.navigate([`../stap-4/${val.id}`]);
+          this.router.navigate([`../stap-3/${val.id}`]);
         }
       },
       (error: HttpErrorResponse) => {
         this.errorMessage = error.error;
       }
     );
+  }
+
+  getDateForInput(date: Date): string {
+    if (date != null) {
+      var uitvoer: string = "";
+      uitvoer += date.getFullYear() + "-";
+      if (date.getMonth().toString().length == 1) {
+        uitvoer += "0" + (date.getMonth() + 1) + "-";
+      } else {
+        uitvoer += (date.getMonth() + 1) + "-";
+      }
+      if (date.getDate().toString().length == 1) {
+        uitvoer += "0" + date.getDate();
+      } else {
+        uitvoer += date.getDate();
+      }
+      //uitvoer += 'T' + date.toTimeString().slice(0, 5);
+      return uitvoer;
+    }
   }
 
 }

@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-12 marginTop10 col-lg-10 offset-lg-1">
-    <app-progression-bar [waarde]=waarde [stap]="2"></app-progression-bar>
+    <app-progression-bar [waarde]=waarde [stap]="3"></app-progression-bar>
   </div>
   <div class="col-12 text-left ">
     <form [formGroup]="stap3Formulier" (ngSubmit)='stap3()'>
@@ -34,7 +34,7 @@
                 [errorGevonden]="submitted &amp;&amp; stap3Formulier.controls.diploma.errors"></app-file-upload>
             </div>
             <div class="col-12 offset-sm-3 col-sm-6 offset-md-4 col-md-4">
-              <button type="submit" class="btn btn-primary marginBottom1O marginTop10 width100">Naar Stap 3!</button>
+              <button type="submit" class="btn btn-primary marginBottom1O marginTop10 width100">Naar Stap 4!</button>
             </div>
           </div>
         </div>
@@ -42,3 +42,4 @@
     </form>
     <button class="btn btn-primary" (click)="toonAfbeelding()">toon afbeelding</button>
   </div>
+<img [src]="image" /> 
