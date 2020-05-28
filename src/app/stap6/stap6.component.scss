@@ -8,3 +8,11 @@ img {
 button {
   margin-bottom: 15px;
 }
+
+a {
+  color: white !important;
+
+  &:visited {
+    color: white !important;
+  }
+}

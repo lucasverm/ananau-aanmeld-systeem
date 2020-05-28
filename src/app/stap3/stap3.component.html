@@ -20,17 +20,17 @@
             </div>
             <div class="col-12 col-sm-6">
               <label for="foto">Scan internationaal reispaspoort</label>
-              <app-file-upload formControlName="reispaspoort"
+              <app-file-upload [blob]='bestanden[0]' formControlName="reispaspoort"
                 [errorGevonden]="submitted &amp;&amp; stap3Formulier.controls.reispaspoort.errors"></app-file-upload>
             </div>
             <div class="col-12 col-sm-6">
               <label for="foto">Scan attest van goed gedrag en zeden</label>
-              <app-file-upload formControlName="attest"
+              <app-file-upload [blob]='bestanden[1]' formControlName="attest"
                 [errorGevonden]="submitted &amp;&amp; stap3Formulier.controls.attest.errors"></app-file-upload>
             </div>
             <div class="col-12 col-sm-6">
               <label for="foto">Scan van diploma of opleiding</label>
-              <app-file-upload formControlName="diploma"
+              <app-file-upload [blob]='bestanden[2]' formControlName="diploma"
                 [errorGevonden]="submitted &amp;&amp; stap3Formulier.controls.diploma.errors"></app-file-upload>
             </div>
             <div class="col-12 offset-sm-3 col-sm-6 offset-md-4 col-md-4">
@@ -40,6 +40,4 @@
         </div>
       </div>
     </form>
-    <button class="btn btn-primary" (click)="toonAfbeelding()">toon afbeelding</button>
   </div>
-<img [src]="image" /> 

@@ -13,16 +13,17 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class Stap5Component implements OnInit {
 
   public applicatie: Applicatie;
-  public waarde: Number = (5 / 5 * 100)
+  public waarde: Number = (5 / 6 * 100)
   public stap5Formulier: FormGroup;
   public successMessage: string = null;
   public errorMessage: string = null;
+  public Weg: any = ['website', 'facebookpagina', 'Instagram', 'via een andere person', 'via de nieuwsbrief']
 
-  Weg: any = ['website', 'facebookpagina', 'Instagram', 'via een andere person', 'via de nieuwsbrief']
 
   constructor(public router: Router, private route: ActivatedRoute, private fb: FormBuilder, private applicatieService: ApplicatieService) {
     this.route.data.subscribe(data => {
       this.applicatie = data['applicatie'];
+
       console.log(this.applicatie);
 
     });
@@ -42,16 +43,12 @@ export class Stap5Component implements OnInit {
     })
   }
 
-  stap5() {
-    this.applicatie.welkeWeg = this.stap5Formulier.value.welkeWeg;
-    this.applicatie.motivatie = this.stap5Formulier.value.motivatie;
-    this.applicatie.vragen = this.stap5Formulier.value.vragenVoorOns;
-    this.applicatie.huidigeStap = 5;
+  indienen() {
+    this.applicatie.huidigeStap = 6;
     this.applicatieService.putApplicatie$(this.applicatie).subscribe(
       val => {
         if (val) {
-          //this.router.navigate([`../stap-6/${val.id}`]);
-          console.log(val);
+          this.router.navigate([`../stap-6`]);
         }
       },
       (error: HttpErrorResponse) => {
@@ -60,8 +57,10 @@ export class Stap5Component implements OnInit {
     );
   }
 
-  formatDate(date: Date): string {
-    var uitvoer: string = "";
+
+formatDate(date: Date): string {
+  var uitvoer: string = "";
+  if (date != null) {
     if (date.getDate().toString().length == 1) {
       uitvoer += "0" + date.getDate();
     } else {
@@ -74,9 +73,8 @@ export class Stap5Component implements OnInit {
       uitvoer += (date.getMonth() + 1) + "-";
     }
     uitvoer += date.getFullYear();
-
-
-    //uitvoer += 'T' + date.toTimeString().slice(0, 5);
-    return uitvoer;
   }
+  //uitvoer += 'T' + date.toTimeString().slice(0, 5);
+  return uitvoer;
+}
 }

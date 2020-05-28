@@ -32,7 +32,7 @@ export class VindApplicatieComponent implements OnInit {
       val => {
         if (val) {
           console.log(val);
-          this.router.navigate([`../stap-${val.huidigeStap}`]);
+          this.router.navigate([`../stap-${val.huidigeStap}/${val.id}`]);
         }
       },
       (error: HttpErrorResponse) => {

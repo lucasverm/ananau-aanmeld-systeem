@@ -10,8 +10,8 @@ export class BestandService {
 
   constructor(private http: HttpClient) { }
 
-  public getFile$(applicatieId: String, folder: string, bestandNaam: string): Observable<Blob> {
-    return this.http.get(`${environment.apiUrl}/bestand/${applicatieId}/${folder.toLowerCase()}/${bestandNaam}`, { responseType: 'blob' });
+  public getFile$(applicatieId: String, bestandNaam: string): Observable<Blob> {
+    return this.http.get(`${environment.apiUrl}/bestand/${applicatieId}/${bestandNaam}`, { responseType: 'blob' });
   }
 
   public postFile$(folder: string, bestandNaam: string, bestandData: File): Observable<{}> {

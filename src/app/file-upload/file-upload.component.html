@@ -1,5 +1,5 @@
 <div class="custom-file">
-  <input class="custom-file-input" type="file" id="fileInput" lang="nl" >
+  <input class="custom-file-input" type="file" id="fileInput" lang="nl">
   <label class="custom-file-label" style="overflow: hidden;" for="fileInput"
     data-browse="Bestand kiezen">{{file ? file.name :  '' }}</label>
 </div>
@@ -8,3 +8,5 @@
   <span class="fake-btn"></span>
   <span class="file-msg">{{file ? file.name : '' }}</span>
 </div>
+
+<img *ngIf="image != null" width="100%" [src]="image" />

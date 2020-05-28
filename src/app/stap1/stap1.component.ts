@@ -14,7 +14,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class Stap1Component implements OnInit {
 
   public applicatie: Applicatie;
-  public waarde: Number = (1 / 5 * 100)
+  public waarde: Number = (1 / 6 * 100)
   public algemeneGegevensFormulier: FormGroup;
   public successMessage: string = null;
   public errorMessage: string = null;

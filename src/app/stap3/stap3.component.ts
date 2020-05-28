@@ -7,6 +7,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { BestandService } from '../services/bestand.service';
 import { forkJoin } from 'rxjs';
 import { DomSanitizer } from '@angular/platform-browser';
+import { BestandenResolver } from '../resolver/bestanden.resolver';
 
 @Component({
   selector: 'app-stap3',
@@ -15,33 +16,47 @@ import { DomSanitizer } from '@angular/platform-browser';
 })
 export class Stap3Component implements OnInit {
   public applicatie: Applicatie;
-  public waarde: Number = (3 / 5 * 100)
+  public waarde: Number = (3 / 6 * 100)
   public stap3Formulier: FormGroup;
   public successMessage: string = null;
   public errorMessage: string = null;
-  public imgage: string = null;
-  constructor(private sanitizer: DomSanitizer, public router: Router, private route: ActivatedRoute, private fb: FormBuilder, private bestandService: BestandService, private applicatieService: ApplicatieService) {
+  public bestanden: Blob[];
+
+  constructor(public router: Router, private route: ActivatedRoute, private fb: FormBuilder, private bestandService: BestandService, private applicatieService: ApplicatieService) {
     this.route.data.subscribe(data => {
+
       this.applicatie = data['applicatie'];
+      /*data['bestanden'].forEach((value: Blob, i) => {
+        var name;
+        if (i == 0) {
+          name = this.applicatie.reispaspoortNaam;
+        } else if (i == 1) {
+          name = this.applicatie.attestNaam;
+        } else if (i == 2) {
+          name = this.applicatie.diplomaNaam;
+        }
+        this.bestanden.push(new File([this.bestanden[i]], name));
+      });
+      console.log(this.bestanden);*/
+      this.bestanden = data['bestanden']
     });
   }
-  public image;
 
   ngOnInit() {
     this.stap3Formulier = this.fb.group({
       reispaspoort: [
         '',
-        [valideerBestandType(true)]
+        //[valideerBestandType(true)]
       ],
       attest: [
         '',
-        [valideerBestandType(true)]
+        // [valideerBestandType(true)]
       ],
       diploma: [
         '',
-        [valideerBestandType(true)]
+        //  [valideerBestandType(true)]
       ],
-    })
+    });
   }
 
   /*stap3() {
@@ -84,45 +99,46 @@ export class Stap3Component implements OnInit {
   }*/
 
   stap3() {
-    let reispasportExtentie = this.stap3Formulier.controls.reispaspoort.value.name.split('.')[this.stap3Formulier.controls.reispaspoort.value.name.split('.').length - 1];
-    let attestExtentie = this.stap3Formulier.controls.attest.value.name.split('.')[this.stap3Formulier.controls.attest.value.name.split('.').length - 1];
-    let diplomaExtentie = this.stap3Formulier.controls.diploma.value.name.split('.')[this.stap3Formulier.controls.diploma.value.name.split('.').length - 1];
-    
-    let reispaspoort = this.bestandService.postFile$(`${this.applicatie.email}`, `reispaspoort${this.applicatie.achternaam}${this.applicatie.voornaam}.${reispasportExtentie}`, this.stap3Formulier.controls.reispaspoort.value)
-    let attest = this.bestandService.postFile$(`${this.applicatie.email}`, `attest${this.applicatie.achternaam}${this.applicatie.voornaam}.${attestExtentie}`, this.stap3Formulier.controls.attest.value)
-    let diploma = this.bestandService.postFile$(`${this.applicatie.email}`, `diploma${this.applicatie.achternaam}${this.applicatie.voornaam}.${diplomaExtentie}`, this.stap3Formulier.controls.diploma.value)
-    
+    this.errorMessage = null;
+    let requests = [];
+    if (this.stap3Formulier.controls.reispaspoort.value.name != null) {
+      let reispasportExtentie = this.stap3Formulier.controls.reispaspoort.value.name.split('.')[this.stap3Formulier.controls.reispaspoort.value.name.split('.').length - 1];
+      requests.push(this.bestandService.postFile$(`${this.applicatie.email}`, `reispaspoort${this.applicatie.achternaam}${this.applicatie.voornaam}.${reispasportExtentie}`, this.stap3Formulier.controls.reispaspoort.value));
+    }
+    if (this.stap3Formulier.controls.attest.value.name != null) {
+      let attestExtentie = this.stap3Formulier.controls.attest.value.name.split('.')[this.stap3Formulier.controls.attest.value.name.split('.').length - 1];
+      requests.push(this.bestandService.postFile$(`${this.applicatie.email}`, `attest${this.applicatie.achternaam}${this.applicatie.voornaam}.${attestExtentie}`, this.stap3Formulier.controls.attest.value))
+    }
+    if (this.stap3Formulier.controls.diploma.value.name != null) {
+      let diplomaExtentie = this.stap3Formulier.controls.diploma.value.name.split('.')[this.stap3Formulier.controls.diploma.value.name.split('.').length - 1];
+      requests.push(this.bestandService.postFile$(`${this.applicatie.email}`, `diploma${this.applicatie.achternaam}${this.applicatie.voornaam}.${diplomaExtentie}`, this.stap3Formulier.controls.diploma.value))
+    }
+    console.log(this.bestanden);
 
-    forkJoin([reispaspoort, attest, diploma]).subscribe(results => {
-      // results[0] is our character
-      // results[1] is our character homeworld
-      console.log(results);
-    });
-    
-  }
+    if ((this.bestanden.length != 3 || this.bestanden.includes(null)) && requests.length != 3) {
+      this.errorMessage = "Geef 3 bestanden op!";
+    } else {
+      if (requests.length == 0) {
+        this.router.navigate([`../stap-4/${this.applicatie.id}`]);
+      } else {
+        forkJoin(requests).subscribe(val => {
+          if (val) {
+            this.router.navigate([`../stap-4/${this.applicatie.id}`]);
+          }
+        },
+          (error: HttpErrorResponse) => {
+            console.log(error);
 
-  private bestandNaarFormData(bestandData: File): FormData {
-    const formData = new FormData();
-    formData.append('bestand', bestandData, bestandData.name ? bestandData.name : 'bestand');
-    return formData;
-  }
+            this.errorMessage = error.error;
 
-  toonAfbeelding() {
-    this.bestandService.getFile$(this.applicatie.id, `${this.applicatie.email}`, "reispaspoort").subscribe(
-      val => {
-        if (val) {
-          console.log("afb: " + val);
-          let objectURL = URL.createObjectURL(val);       
-          this.image = this.sanitizer.bypassSecurityTrustUrl(objectURL);
-          //this.router.navigate([`../stap-2`]);
-        }
-      },
-      (error: HttpErrorResponse) => {
-        console.log(error);
-        this.errorMessage = error.error;
+          });
       }
-    );
+    }
+
   }
+
+
+
 
 }
 
@@ -140,7 +156,7 @@ function valideerBestandType(verplicht = true): ValidatorFn {
       return { wrongFileType: true };
     }
     const extentie = foto.split('.')[foto.split('.').length - 1];
-    if (!['jpg', 'png', 'jpeg'].includes(extentie.toLowerCase())) {
+    if (!['jpg', 'png', 'jpeg', 'pdf'].includes(extentie.toLowerCase())) {
       return { wrongFileType: true };
     }
     return null;

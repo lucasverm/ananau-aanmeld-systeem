@@ -15,6 +15,8 @@ import { Stap3Component } from './stap3/stap3.component';
 import { FileUploadComponent } from './file-upload/file-upload.component';
 import { Stap4Component } from './stap4/stap4.component';
 import { Stap5Component } from './stap5/stap5.component';
+import { Stap6Component } from './stap6/stap6.component';
+import { ApplicatieBekijkenComponent } from './applicatie-bekijken/applicatie-bekijken.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,9 @@ import { Stap5Component } from './stap5/stap5.component';
     Stap3Component,
     FileUploadComponent,
     Stap4Component,
-    Stap5Component
+    Stap5Component,
+    Stap6Component,
+    ApplicatieBekijkenComponent
   ],
   imports: [
     BrowserModule,

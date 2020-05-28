@@ -1,7 +1,4 @@
 <div class="row">
-  <div class="col-12 marginTop10 col-lg-10 offset-lg-1">
-    <app-progression-bar [waarde]=waarde [stap]="5"></app-progression-bar>
-  </div>
   <div class="col-12 text-left ">
     <div class="row">
       <div class="col-12 col-lg-10 offset-lg-1">
@@ -10,15 +7,15 @@
             <h2>Applicatie controleren: </h2>
           </div>
           <div class="col-12">
+            <h3>Algemene info</h3>
+          </div>
+          <div class="col-12">
             <div class="alert alert-danger" role="alert" [hidden]="errorMessage == null">
               {{errorMessage}}
             </div>
           </div>
           <div class="col-12">
-            <h3>Algemene info</h3>
-          </div>
-          <div class="col-12">
-            <table class="table table-sm table-bordered" (click)=gaNaarStap(1)>
+            <table class="table table-sm table-bordered">
               <tr>
                 <th>Voornaam</th>
                 <td>{{applicatie.voornaam}}</td>
@@ -69,7 +66,7 @@
             <h3>Nood contact</h3>
           </div>
           <div class="col-12">
-            <table class="table table-sm table-bordered" (click)=gaNaarStap(1)>
+            <table class="table table-sm table-bordered">
               <tr>
                 <th>Voornaam nood contact</th>
                 <td>{{applicatie.voornaamNood}}</td>
@@ -92,7 +89,7 @@
             <h3>Medische informatie</h3>
           </div>
           <div class="col-12">
-            <table class="table table-sm table-bordered" (click)=gaNaarStap(1)>
+            <table class="table table-sm table-bordered">
               <tr>
                 <th>Alergieën</th>
                 <td>{{applicatie.allergie}}</td>
@@ -107,7 +104,7 @@
             <h3>Vrijwillgerswerk/stage info:</h3>
           </div>
           <div class="col-12">
-            <table class="table table-sm table-bordered" (click)=gaNaarStap(1)>
+            <table class="table table-sm table-bordered">
               <tr>
                 <th>Opleiding/beroep:</th>
                 <td>{{applicatie.opleiding}}</td>
@@ -139,7 +136,7 @@
             <h2>Data van stage</h2>
           </div>
           <div class="col-12">
-            <table class="table table-sm table-bordered" (click)=gaNaarStap(2)>
+            <table class="table table-sm table-bordered">
               <tr>
                 <th>Voorgesteld startdatum van stage</th>
                 <td>{{formatDate(applicatie.periodeStageVan)}}</td>
@@ -166,16 +163,16 @@
             <h2>Bestanden</h2>
           </div>
           <div class="col-12">
-            <table class="table table-sm table-bordered" (click)=gaNaarStap(3)>
-              <tr>
+            <table class="table table-sm table-bordered">
+              <tr class="pointer" (click)="getDocument('reispaspoort', applicatie.reispaspoortNaam)">
                 <th>Scan internationaal reispaspoort</th>
                 <td>{{applicatie.reispaspoortNaam}}</td>
               </tr>
-              <tr>
+              <tr class="pointer" (click)="getDocument('attest', applicatie.attestNaam)">
                 <th>Scan attest van goed gedrag en zeden</th>
                 <td>{{applicatie.attestNaam}}</td>
               </tr>
-              <tr>
+              <tr class="pointer" (click)="getDocument('diploma', applicatie.diplomaNaam)">
                 <th>Scan van diploma of opleiding</th>
                 <td>{{applicatie.diplomaNaam}}</td>
               </tr>
@@ -185,7 +182,7 @@
             <h2>Extra informatie</h2>
           </div>
           <div class="col-12">
-            <table class="table table-sm table-bordered" (click)=gaNaarStap(4)>
+            <table class="table table-sm table-bordered marginBottom">
               <tr>
                 <th>Heb je nog verdere vragen voor ons?</th>
                 <td>{{applicatie.welkeWeg}}</td>
@@ -199,10 +196,6 @@
                 <td>{{applicatie.vragen}}</td>
               </tr>
             </table>
-          </div>
-          <div class="col-12 offset-sm-3 col-sm-6 offset-md-4 col-md-4">
-            <button type="submit" class="btn btn-primary marginBottom1O marginTop10 width100"
-              (click)=indienen()>Indienen!</button>
           </div>
         </div>
       </div>

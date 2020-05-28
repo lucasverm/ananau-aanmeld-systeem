@@ -1,0 +1,12 @@
+.pointer {
+  cursor: pointer !important;
+
+  &:hover {
+    background-color: lightgrey;
+    ;
+  }
+}
+
+.marginBottom {
+  margin-bottom: 20px;
+}

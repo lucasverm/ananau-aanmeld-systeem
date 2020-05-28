@@ -9,6 +9,9 @@ import { ApplicatieResolver } from './resolver/applicatie.resolver';
 import { Stap3Component } from './stap3/stap3.component';
 import { Stap4Component } from './stap4/stap4.component';
 import { Stap5Component } from './stap5/stap5.component';
+import { BestandenResolver } from './resolver/bestanden.resolver';
+import { Stap6Component } from './stap6/stap6.component';
+import { ApplicatieBekijkenComponent } from './applicatie-bekijken/applicatie-bekijken.component';
 
 
 const routes: Routes = [
@@ -33,7 +36,7 @@ const routes: Routes = [
   {
     path: 'stap-3/:id',
     component: Stap3Component,
-    resolve: { applicatie: ApplicatieResolver },
+    resolve: { applicatie: ApplicatieResolver, bestanden: BestandenResolver },
   },
   {
     path: 'stap-4/:id',
@@ -44,6 +47,16 @@ const routes: Routes = [
     path: 'stap-5/:id',
     component: Stap5Component,
     resolve: { applicatie: ApplicatieResolver },
+  },
+  {
+    path: 'stap-6',
+    component: Stap6Component,
+  },
+
+  {
+    path: 'applicatie-bekijken/:id',
+    component: ApplicatieBekijkenComponent,
+    resolve: { applicatie: ApplicatieResolver }
   },
   {
     path: 'vind-applicatie',
