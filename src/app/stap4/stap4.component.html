@@ -22,7 +22,7 @@
             <div class="col-12 col-sm-6">
               <label for="motivatie" class="marginTop10">Hoe heb je voor het eerst van Añañau gehoord?</label>
               <select class="form-control" id="selectbox" formControlName="welkeWeg">
-                <option *ngFor="let weg of Weg" [ngValue]="weg" (change)="changeWeg($event)">{{weg}}
+                <option *ngFor="let weg of Weg" [ngValue]="weg">{{weg}}
                 </option>
               </select>
             </div>

@@ -35,11 +35,11 @@ export class ApplicatieBekijkenComponent implements OnInit {
     })
   }
 
-  getDocument(naam:string, fileNaam:string) {
-    this.bestandService.getFile$(this.applicatie.id, naam).subscribe(
+  getDocument(naam:String, fileNaam:String) {
+    this.bestandService.getFile$(this.applicatie.id, naam.toString()).subscribe(
       val => {
         if (val) {
-          saveAs(val, fileNaam);
+          saveAs(val, fileNaam.toString());
         }
       },
       (error: HttpErrorResponse) => {
