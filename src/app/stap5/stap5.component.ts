@@ -23,9 +23,6 @@ export class Stap5Component implements OnInit {
   constructor(public router: Router, private route: ActivatedRoute, private fb: FormBuilder, private applicatieService: ApplicatieService) {
     this.route.data.subscribe(data => {
       this.applicatie = data['applicatie'];
-
-      console.log(this.applicatie);
-
     });
   }
 
@@ -58,23 +55,23 @@ export class Stap5Component implements OnInit {
   }
 
 
-formatDate(date: Date): string {
-  var uitvoer: string = "";
-  if (date != null) {
-    if (date.getDate().toString().length == 1) {
-      uitvoer += "0" + date.getDate();
-    } else {
-      uitvoer += date.getDate();
+  formatDate(date: Date): string {
+    var uitvoer: string = "";
+    if (date != null) {
+      if (date.getDate().toString().length == 1) {
+        uitvoer += "0" + date.getDate();
+      } else {
+        uitvoer += date.getDate();
+      }
+      uitvoer += "-"
+      if (date.getMonth().toString().length == 1) {
+        uitvoer += "0" + (date.getMonth() + 1) + "-";
+      } else {
+        uitvoer += (date.getMonth() + 1) + "-";
+      }
+      uitvoer += date.getFullYear();
     }
-    uitvoer += "-"
-    if (date.getMonth().toString().length == 1) {
-      uitvoer += "0" + (date.getMonth() + 1) + "-";
-    } else {
-      uitvoer += (date.getMonth() + 1) + "-";
-    }
-    uitvoer += date.getFullYear();
+    //uitvoer += 'T' + date.toTimeString().slice(0, 5);
+    return uitvoer;
   }
-  //uitvoer += 'T' + date.toTimeString().slice(0, 5);
-  return uitvoer;
-}
 }

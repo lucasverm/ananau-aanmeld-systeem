@@ -154,7 +154,7 @@
               <textarea type="text" class="form-control" id="voorstellen" formControlName="voorstellen"></textarea>
             </div>
             <div class="col-12 offset-sm-3 col-sm-6 offset-md-4 col-md-4">
-              <button type="submit" class="btn btn-primary marginBottom1O marginTop10 width100">Naar Stap 2!</button>
+              <button type="submit" class="btn btn-primary marginBottom1O marginTop10 width100" [disabled]='!algemeneGegevensFormulier.valid'>Naar Stap 2!</button>
             </div>
           </div>
         </div>

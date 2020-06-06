@@ -31,7 +31,6 @@ export class VindApplicatieComponent implements OnInit {
     this.applicatieService.getApplicatieByEmailAndAchternaam$(this.vindFormulier.value.email, this.vindFormulier.value.achternaam).subscribe(
       val => {
         if (val) {
-          console.log(val);
           this.router.navigate([`../stap-${val.huidigeStap}/${val.id}`]);
         }
       },

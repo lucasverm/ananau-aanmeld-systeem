@@ -94,7 +94,6 @@ export class Stap1Component implements OnInit {
       this.applicatieService.postApplicatie$(this.applicatie).subscribe(
         val => {
           if (val) {
-            console.log(val);
             this.router.navigate([`../stap-2/${val.id}`]);
           }
         },
@@ -106,7 +105,6 @@ export class Stap1Component implements OnInit {
       this.applicatieService.putApplicatie$(this.applicatie).subscribe(
         val => {
           if (val) {
-            console.log(val);
             this.router.navigate([`../stap-2/${val.id}`]);
           }
         },

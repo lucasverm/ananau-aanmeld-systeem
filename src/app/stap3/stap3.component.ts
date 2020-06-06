@@ -113,7 +113,6 @@ export class Stap3Component implements OnInit {
       let diplomaExtentie = this.stap3Formulier.controls.diploma.value.name.split('.')[this.stap3Formulier.controls.diploma.value.name.split('.').length - 1];
       requests.push(this.bestandService.postFile$(`${this.applicatie.email}`, `diploma${this.applicatie.achternaam}${this.applicatie.voornaam}.${diplomaExtentie}`, this.stap3Formulier.controls.diploma.value))
     }
-    console.log(this.bestanden);
 
     if ((this.bestanden.length != 3 || this.bestanden.includes(null)) && requests.length != 3) {
       this.errorMessage = "Geef 3 bestanden op!";

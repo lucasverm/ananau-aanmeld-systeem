@@ -20,7 +20,6 @@ export class Stap2Component implements OnInit {
   constructor(public router: Router, private route: ActivatedRoute, private fb: FormBuilder, private applicatieService: ApplicatieService) {
     this.route.data.subscribe(data => {
       this.applicatie = data['applicatie'];
-      console.log(this.applicatie);
     });
   }
 
@@ -35,10 +34,11 @@ export class Stap2Component implements OnInit {
   }
 
   stap2() {
-    this.applicatie.periodeStageVan = this.stap2Formulier.value.periodeStageVan;
-    this.applicatie.periodeStageTot = this.stap2Formulier.value.periodeStageTot;
-    this.applicatie.periodeVerblijfVan = this.stap2Formulier.value.periodeVerblijfVan;
-    this.applicatie.periodeVerblijfTot = this.stap2Formulier.value.periodeVerblijfTot;
+    this.applicatie.periodeStageVan = new Date(this.stap2Formulier.value.periodeStageVan);
+    
+    this.applicatie.periodeStageTot = new Date(this.stap2Formulier.value.periodeStageTot);
+    this.applicatie.periodeVerblijfVan = new Date(this.stap2Formulier.value.periodeVerblijfVan);
+    this.applicatie.periodeVerblijfTot = new Date(this.stap2Formulier.value.periodeVerblijfTot);
     this.applicatie.aantalWekenSpaans = this.stap2Formulier.value.aantalWekenSpaans;
     this.applicatie.huidigeStap = 2;
     this.applicatieService.putApplicatie$(this.applicatie).subscribe(
@@ -54,6 +54,7 @@ export class Stap2Component implements OnInit {
   }
 
   getDateForInput(date: Date): string {
+    
     if (date != null) {
       var uitvoer: string = "";
       uitvoer += date.getFullYear() + "-";
